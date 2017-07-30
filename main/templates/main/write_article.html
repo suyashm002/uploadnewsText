@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>Post an article!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<style>
+		.glyphicon.glyphicon-pencil {
+			font-size : 15px;
+		}
+
+		.textarea {
+			white-space: pre-line;
+		}
+	</style>
+	<body>
+		<nav class = "navbar navbar-inverse">
+        	<div class = "container-fluid">
+            	<div class = "navbar-header">
+                	<a href="{% url 'main:index' %}"><span class = "navbar-brand"><b>Write an article!</b></span></a>
+            	</div>
+            	<ul class="nav navbar-nav">
+                	<li id="ssid_mod"><a href="{% url 'main:get_articles' %}">Read articles</a></li>
+                	<li><a href="{% url 'main:get_activities' %}">Get activity articles</a></li>
+                	<li><a href="{% url 'main:get_news' %}">Get news articles</a></li>
+            	</ul>
+        	</div>
+    	</nav>
+		<div class="container">
+			<h1 align="CENTER">Create an article</h1>
+			<hr/>
+			<form action="{% url 'main:post_article' %}" method="POST" id="poster" name="poster">
+				{% csrf_token %}
+				<h2>Title</h2>
+					<input type="text" id="title" name="title" class = "form-control" style="font-size: 20px" />
+				<h3>Text</h3>
+					<textarea class="form-control" rows="10" id="text" name="text"></textarea>
+					<hr />
+				<div class="form-group">
+					<label for="art_type">Select article type:</label>
+					<select class="form-control" id="art_type" name="art_type">
+						<option value="news">News</option>
+						<option value="activity">Activity</option>
+					</select>
+					<br/><br/>
+				</div>
+			</form>
+				<div align="CENTER">
+					<button onclick="post_article()" class = "btn btn-primary btn-lg" align="CENTER"><i class = "glyphicon glyphicon-pencil"></i> Post Article!</button>
+				</div>
+				{% if post_saved %}
+				<hr />
+				<div class="jumbotron">
+					<p>Article saved! See all articles <a href="{% url 'main:get_articles' %}">here</a></p>
+				</div>
+				{% endif %}
+		</div>
+	</body>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		function post_article() {
+			var title = document.getElementById("title").value;
+			if (title == null || title == '') {
+				alert('Title cannot be blank');
+				return;
+			}
+			var text = document.getElementById("text").value;
+			if (text == null || text == '') {
+				alert('Text cannot be blank');
+				return;
+			}
+			document.getElementById("poster").submit();
+		}
+	</script>
+</html>

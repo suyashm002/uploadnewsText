@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>Article list</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<nav class = "navbar navbar-inverse">
+        	<div class = "container-fluid">
+            	<div class = "navbar-header">
+                	<a href="{% url 'main:index' %}"><span class = "navbar-brand"><b>Write an article!</b></span></a>
+            	</div>
+            	<ul class="nav navbar-nav">
+                	<li id="ssid_mod"><a href="{% url 'main:get_articles' %}">Read articles</a></li>
+            	</ul>
+        	</div>
+    	</nav>
+		<div class="container">
+		<h1 align="CENTER">Article list</h1>
+		<table class = "table table-striped table-bordered" align="CENTER">
+			<thead>
+				<tr>
+					<th>Article Name</th>
+					<th>Article Type</th>
+					<th>Publishing Timestamp</th>
+					<th></th>
+				</tr>
+			</thead>
+			{% for article in articles %}
+			<tr>
+				<td> {{ article.title }}</td>
+				<td> {% if article.is_activity %} 
+						Activity 
+					{% else %} 
+						News 
+					{% endif %} </td>
+				<td>{{ article.date_created }}</td>
+				<td><a href = "{% url 'main:show_article' article.pk %}">Read Article</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

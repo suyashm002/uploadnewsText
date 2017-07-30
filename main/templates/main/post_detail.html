@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>{{ post.title }}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			.endtext {
+				font-style : italic;
+			}
+			.post_text {
+				white-space: pre-line;
+				font-size: 20;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class = "navbar navbar-inverse">
+        	<div class = "container-fluid">
+            	<div class = "navbar-header">
+                	<a href="{% url 'main:index' %}"><span class = "navbar-brand"><b>Write an article!</b></span></a>
+            	</div>
+            	<ul class="nav navbar-nav">
+                	<li id="ssid_mod"><a href="{% url 'main:get_articles' %}">Read articles</a></li>
+            	</ul>
+        	</div>
+    	</nav>
+		<div class="container">
+			<h1 align = "CENTER">{{ post.title }}</h1>
+			<h3 align = "CENTER">Published on: {{ post.date_created }}</h3>
+			<hr/>
+			<p class="post_text">
+			{{ post.text }}
+			</p>
+			<hr />
+			<div id="jumbotron">
+				<p class="endtext" align="CENTER">
+					This was published under the
+					{% if post.is_activity %}
+						activity
+					{% else %}
+						news
+					{% endif %} category.
+				</p>
+			</div>
+		</div>
+	</body>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>
